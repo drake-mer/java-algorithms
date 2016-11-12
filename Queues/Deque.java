@@ -1,42 +1,37 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
- * @author david
+ * @author David Kremer
+ * 
+ * The Deque is most often known as a « doubly linked list »
+ * The algorithms' complexities are :
+ *   # O(1) to dequeue (from the end and from the beginning)
+ *   # O(1) to enqueue (at the start and at the beginning)
+ *   # O(n) to retrieve the (n-th) element
  *
- * We implement the Deque
  *
- * Based on a linked bag model
- *
- */
+ */ 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class Deque<Item> implements Iterable<Item> {
 
-    /* Static attributes of such an object */
     private Node head;
     private Node tail;
     private int N;
-
-    /* Definition of a node ; recursive, */
-    private class Node {
-
+    
+    private class Node 
+    {
         private Item item;
         private Node next;
         private Node previous;
     }
 
-    /* Constructor (initializes to a null value) */
-    public Deque() {
+    public Deque() 
+    {
         head = null;
         tail = null;
         N = 0;
-        /*assert check();*/
     }
 
     public boolean isEmpty() // is the deque empty?
@@ -60,11 +55,8 @@ public class Deque<Item> implements Iterable<Item> {
             N++;
         } else if (N > 0) {
             Node oldtail = tail;
-            /* keeping the old tail in line */
             tail = new Node();
-            /* creating the new node  */
             tail.next = oldtail;
-            /* keeping the old tail in line */
             tail.next.previous = tail;
             tail.item = item;
             N++;
