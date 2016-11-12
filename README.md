@@ -1,7 +1,5 @@
 # Java Algorithms
 
-Content of the package at the date of writing
-
 ## Randomized Queue
 
 A randomized queue is a data structure that allows to push with an O(1) complexity and to pop items randomly chosen, again with an O(1) complexity.
