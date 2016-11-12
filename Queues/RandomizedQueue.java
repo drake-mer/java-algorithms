@@ -1,17 +1,24 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
  *
- * @author david
+ * @author: David Kremer
  *
- * We implement the Deque
+ * Here the concept is simply summarized in the data structure ;
+ * 
+ * For an array, we set up a size (and a max_size to avoid too huge memory consumption)
+ * 
+ * The instanciation of the Randomized Queue initializes the array aiming to contain
+ * the data.
  *
- * Based on a linked bag model
+ * To enqueue an item, one simply appends it at the top of the stack
  *
+ * To dequeue an item, one element is taken randomly and the array is 
+ * kept in order by copying the last element in the place of the removed 
+ * element.
+ *
+ * This data structure is well suited when :
+ * 1) You don't mind about the order in which you put your elements
+ * 2) You want a dynamic size allocation but you want for the copies and 
+ *    memory allocations to keep a low profile
  */
 import edu.princeton.cs.algs4.StdRandom;
 import java.util.Iterator;
@@ -25,13 +32,15 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private Item[] bag;
 
     /* Constructor (initializes to a null value) */
-    public RandomizedQueue() {
+    public RandomizedQueue() 
+    {
         N = 0;
         max_size = 1;
         bag = (Item[]) new Object[max_size];
     }
 
-    public boolean isEmpty() {
+    public boolean isEmpty() 
+    {
         return N == 0;
     }
 
@@ -39,36 +48,46 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         return N;
     }
 
-    public void enqueue(Item item) {
-        if (item == null) {
+    public void enqueue(Item item) 
+    {
+        if (item == null) 
+        {
             throw new java.lang.NullPointerException();
-        } else {
-            if (N == max_size) {
+        } else 
+        {
+            if (N == max_size) 
+            {
                 Item[] old_bag = bag;
                 int i;
                 max_size *= 2;
                 bag = (Item[]) new Object[max_size];
-                for (i = 0; i < N; i++) {
+                for (i = 0; i < N; i++) 
+                {
                     bag[i] = old_bag[i];
                 }
                 bag[N] = item;
-            } else {
+            } else 
+            {
                 bag[N] = item;
             }
             N++;
         }
     }
 
-    public Item dequeue() {
-        if (N == 0) {
+    public Item dequeue() 
+    {
+        if (N == 0) 
+        {
             throw new java.util.NoSuchElementException();
-        } else {
+        } else 
+        {
             int random_index;
             Item return_result;
             random_index = StdRandom.uniform(N);
             return_result = bag[random_index];
             bag[random_index] = bag[N - 1];
-            if (N < max_size / 2 && max_size > 1) {
+            if (N < max_size / 2 && max_size > 1) 
+            {
                 Item[] old_bag = bag;
                 int i;
                 max_size /= 2;
@@ -77,10 +96,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
                     bag[i] = old_bag[i];
                 }
                 old_bag = null ;
-                //            old_bag = null ;
             }
             N--;
-
             return return_result;
         }
     }
