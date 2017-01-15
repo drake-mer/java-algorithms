@@ -20,21 +20,17 @@ public class Subset
         int k;
         String new_token;
         s = new RandomizedQueue<>();
-        try 
-        {
+        try {
             k = parseInt(args[0]);
-        } catch (java.util.NoSuchElementException x) 
-        {
+        } catch (java.util.NoSuchElementException x) {
             return;
         }
 
         while (true) 
         {
-            try 
-            {
+            try {
                 new_token = StdIn.readString();
-            } catch (java.util.NoSuchElementException x) 
-            {
+            } catch (java.util.NoSuchElementException x) {
                 break;
             }
             s.enqueue(new_token);
